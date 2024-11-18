@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Even / Odd Game</title>
+</head>
+<body>
+    <script>
+        // Main game function
+        function evenOddGame() {
+            // Prompt for player name
+            let playerName = "";
+            while (!playerName) {
+                playerName = prompt("Please enter your name:");
+                if (!playerName) {
+                    alert("Name cannot be empty. Please enter a valid name.");
+                }
+            }
+
+            let wins = 0;
+            let losses = 0;
+
+            let playAgain = true;
+
+            // Main game loop
+            while (playAgain) {
+                // Prompt for even or odd
+                let playerChoice = "";
+                while (playerChoice !== "even" && playerChoice !== "odd") {
+                    playerChoice = prompt(`${playerName}, do you choose even or odd?`).toLowerCase();
+                    if (playerChoice !== "even" && playerChoice !== "odd") {
+                        alert("Invalid choice. Please enter 'even' or 'odd'.");
+                    }
+                }
+
+                // Generate two random numbers between 1 and 4 (inclusive)
+                const num1 = Math.floor(Math.random() * 4) + 1;
+                const num2 = Math.floor(Math.random() * 4) + 1;
+
+                // Calculate the sum and determine even or odd
+                const sum = num1 + num2;
+                const isEven = sum % 2 === 0;
+                const result = isEven ? "even" : "odd";
+
+                // Determine win or loss
+                let outcome;
+                if ((isEven && playerChoice === "even") || (!isEven && playerChoice === "odd")) {
+                    outcome = "win";
+                    wins++;
+                } else {
+                    outcome = "lose";
+                    losses++;
+                }
+
+                // Display results
+                alert(`${playerName}, you chose ${playerChoice}, the sum was ${sum}, which is an ${result} number. You ${outcome}!\n` +
+                      `That's ${wins} wins and ${losses} losses!`);
+
+                // Ask to play again
+                let replayChoice = "";
+                while (replayChoice !== "y" && replayChoice !== "n") {
+                    replayChoice = prompt("Would you like to play again? (y/n)").toLowerCase();
+                    if (replayChoice !== "y" && replayChoice !== "n") {
+                        alert("Invalid choice. Please enter 'y' or 'n'.");
+                    }
+                }
+
+                // Determine if the player wants to continue
+                playAgain = replayChoice === "y";
+            }
+
+            // End of session
+            alert(`Thanks for playing, ${playerName}! Final record: ${wins} wins and ${losses} losses.`);
+        }
+
+        // Start the game
+        evenOddGame();
+    </script>
+</body>
+</html>
 
